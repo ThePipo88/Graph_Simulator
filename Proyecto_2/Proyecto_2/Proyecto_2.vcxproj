@@ -142,7 +142,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Proyecto_2.cpp" />
+    <ClCompile Include="AppContext.cpp" />
+    <ClCompile Include="Linea.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mapa.cpp" />
+    <ClCompile Include="Seleccion.cpp" />
+    <ClCompile Include="Ventana.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AppContext.h" />
+    <ClInclude Include="Linea.h" />
+    <ClInclude Include="Mapa.h" />
+    <ClInclude Include="Seleccion.h" />
+    <ClInclude Include="Ventana.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

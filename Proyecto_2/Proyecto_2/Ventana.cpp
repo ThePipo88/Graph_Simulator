@@ -92,7 +92,20 @@ void Ventana::bucleJuego() {
                 }
 
             }
+            else if (event.type == sf::Event::MouseMoved) {
+                mapa->moverLinea();
+            }
+             else if (event.key.code == sf::Keyboard::Enter) {
 
+                mapa->enter();
+            }
+            else if (event.type == sf::Event::TextEntered) {
+                if (event.text.unicode < 128)
+                {
+                    char letra = static_cast<char>(event.text.unicode);
+                    mapa->ingresarPeso(letra);
+                }
+            }
         }
     }
 }

@@ -14,14 +14,17 @@ private:
 	string datosPartida;
 	RenderWindow* ventana;
 	Event* ev;
+	int tipo;
 	//Partida* partida;
 public:
 	static AppContext& getInstance();
 	int getPantalla();
+	int getTipo();
 	void setPantalla(int p);
 	void setPartidaCargada(bool partida);
 	bool getPartidaCargada();
 	void setDatosPartida(string datos);
+	void setTipo(int t);
 	string getDatosPartida();
 	RenderWindow* getWindow();
 	void setWindow(RenderWindow* v);

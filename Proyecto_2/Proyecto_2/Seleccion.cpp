@@ -35,11 +35,13 @@ void Seleccion::clickPantalla(int x, int y) {
     }
     else if (x > 848 && x < 1112 && y > 272 && y < 345) {
         cout << "Dirigido" << endl;
+        AppContext::getInstance().setTipo(2);
         AppContext::getInstance().setPantalla(3);
     }
     else if (x > 847 && x < 1112 && y > 429 && y < 501) {
         cout << "No dirigido" << endl;
         AppContext::getInstance().setPantalla(3);
+        AppContext::getInstance().setTipo(1);
     }
 
 }

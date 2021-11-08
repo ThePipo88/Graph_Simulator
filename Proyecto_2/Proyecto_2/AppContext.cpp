@@ -21,10 +21,17 @@ int AppContext::getPantalla() {
 	return this->pantalla;
 }
 
+int AppContext::getTipo() {
+	return this->tipo;
+}
+
 void AppContext::setPantalla(int p) {
 	this->pantalla = p;
 }
 
+void AppContext::setTipo(int t) {
+	this->tipo = t;
+}
 
 RenderWindow* AppContext::getWindow() {
 	return ventana;

@@ -127,30 +127,34 @@ void Mapa::clickPantalla(int x, int y) {
 
         cout << "Kruskal" << endl;
         if (AppContext::getInstance().getTipo() == 1) {
-            g = new Grafo(V,E);
 
-            for (int i = 0; i < datos.size(); i++) {
-                cout << datos[i].n1 << endl;
-                g->agregarArista(datos[i].n1, datos[i].n2, datos[i].p);
-            }
-            int rs = g->kruskal();
-            cout << "Kruskal" << endl;
-            for (int i = 0; i < g->getDatos().size(); i++) {
-                int n1 = g->getDatos()[i].first;
-                int n2 = g->getDatos()[i].second;
+            if (tipo == "normal") {
+                g = new Grafo(V, E);
 
-                cout << getLetra(n1, "kruskal") + "-" + getLetra(n2, "kruskal") << endl;
+                for (int i = 0; i < datos.size(); i++) {
+                    cout << datos[i].n1 << endl;
+                    g->agregarArista(datos[i].n1, datos[i].n2, datos[i].p);
+                }
+                int rs = g->kruskal();
+                cout << "Kruskal" << endl;
+                for (int i = 0; i < g->getDatos().size(); i++) {
+                    int n1 = g->getDatos()[i].first;
+                    int n2 = g->getDatos()[i].second;
+
+                    cout << getLetra(n1, "kruskal") + "-" + getLetra(n2, "kruskal") << endl;
+                }
+                tipo = "kruskal";
+                cout << "\nWeight of MST is " << rs;
             }
-            tipo = "kruskal";
-            cout << "\nWeight of MST is " << rs;
+            else {
+                tipo = "normal";
+            }
         }
         else {
 
         }
     }
     else {
-
-
 
         if (AppContext::getInstance().getTipo() == 1) {
 

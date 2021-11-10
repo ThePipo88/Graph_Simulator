@@ -31,6 +31,14 @@ void AristaGrafico::setPeso(int peso) {
 	this->pesoA = peso;
 }
 
+void AristaGrafico::setLetra1(string l1) {
+	this->letra1 = l1;
+}
+
+void AristaGrafico::setLetra2(string l2) {
+	this->letra2 = l2;
+}
+
 int AristaGrafico::getX1() {
 	return x1;
 }
@@ -49,6 +57,14 @@ int AristaGrafico::getY2() {
 
 int AristaGrafico::getPeso() {
 	return pesoA;
+}
+
+string AristaGrafico::getLetra1() {
+	return letra1;
+}
+
+string AristaGrafico::getLetra2() {
+	return letra2;
 }
 
 Vertex AristaGrafico::getLinea() {

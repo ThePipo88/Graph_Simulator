@@ -64,3 +64,12 @@ void AppContext::setDatosPartida(string datos) {
 string AppContext::getDatosPartida() {
 	return this->datosPartida;
 }
+
+vector<par> AppContext::getResultadoKruskal() {
+	return datosKrukal;
+}
+
+
+void AppContext::setDatosKruskal(int u, int v) {
+	datosKrukal.push_back({u,v});
+}

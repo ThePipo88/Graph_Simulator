@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="AppContext.cpp" />
     <ClCompile Include="AristaGrafico.cpp" />
+    <ClCompile Include="Kruskal.cpp" />
     <ClCompile Include="Linea.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mapa.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="AppContext.h" />
     <ClInclude Include="AristaGrafico.h" />
+    <ClInclude Include="kruskal.h" />
     <ClInclude Include="Linea.h" />
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="Seleccion.h" />

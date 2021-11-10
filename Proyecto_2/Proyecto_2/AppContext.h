@@ -6,6 +6,8 @@
 using namespace sf;
 using namespace std;
 
+typedef pair<int, int> par;
+
 class AppContext {
 private:
 	AppContext();
@@ -15,11 +17,13 @@ private:
 	RenderWindow* ventana;
 	Event* ev;
 	int tipo;
+	vector<par> datosKrukal;
 	//Partida* partida;
 public:
 	static AppContext& getInstance();
 	int getPantalla();
 	int getTipo();
+	vector<par> getResultadoKruskal();
 	void setPantalla(int p);
 	void setPartidaCargada(bool partida);
 	bool getPartidaCargada();
@@ -30,4 +34,5 @@ public:
 	void setWindow(RenderWindow* v);
 	Event* getEvent();
 	void setEvent(Event* e);
+	void setDatosKruskal(int u, int v);
 };

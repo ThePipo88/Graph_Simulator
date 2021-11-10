@@ -117,4 +117,7 @@ void Ventana::clickPantalla(int x, int y) {
         cout << "Jugar" << endl;
         AppContext::getInstance().setPantalla(2);
     }
+    else {
+        
+    }
 }

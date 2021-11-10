@@ -24,6 +24,9 @@ void VerticeGrafico::setLetra1(string lt1) {
 	this->letra1 = lt1;
 }
 
+void VerticeGrafico::setNumero(int n) {
+	numero = n;
+}
 
 int VerticeGrafico::getX1() {
 	return x1;
@@ -33,11 +36,13 @@ int VerticeGrafico::getY1() {
 	return y1;
 }
 
-
 string VerticeGrafico::getLetra1() {
 	return letra1;
 }
 
+int VerticeGrafico::getNumero() {
+	return numero;
+}
 
 void VerticeGrafico::dibujarVertice(RenderWindow* window) {
 

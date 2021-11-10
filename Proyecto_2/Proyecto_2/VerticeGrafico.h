@@ -15,6 +15,7 @@ private:
 
 	string letra1 = "";
 	string letra2 = "";
+	int numero;
 	int pesoA = 0;
 	int x1 = 0;
 	int y1 = 0;
@@ -31,9 +32,13 @@ public:
 
 	void setLetra1(string lt1);
 
+	void setNumero(int numero);
+
 	int getX1();
 
 	int getY1();
+
+	int getNumero();
 
 	string getLetra1();
 

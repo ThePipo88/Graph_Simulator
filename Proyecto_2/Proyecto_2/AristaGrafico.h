@@ -16,6 +16,9 @@ private:
 	int y1 = 0;
 	int x2 = 0;
 	int y2 = 0;
+	string letra1 = "";
+	string letra2 = "";
+
 
 public:
 
@@ -31,6 +34,10 @@ public:
 
 	void setPeso(int ps);
 
+	void setLetra1(string l1);
+
+	void setLetra2(string l2);
+
 	int getX1();
 
 	int getX2();
@@ -38,6 +45,10 @@ public:
 	int getY1();
 
 	int getY2();
+
+	string getLetra1();
+
+	string getLetra2();
 
 	Vertex getLinea();
 

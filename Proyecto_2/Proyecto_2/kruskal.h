@@ -5,7 +5,7 @@ using namespace std;
 
 typedef pair<int, int> iPair;
 
-class Grafo{
+class kruskal{
 
 private:
 	int V, E;
@@ -13,9 +13,9 @@ private:
 	vector<iPair> datos;
 public:
 
-	Grafo(int V, int E);
+	kruskal(int V, int E);
 	void agregarArista(int u, int v, int w);
-	int kruskal();
+	int kruskalAlg();
 	vector<iPair> getDatos();
 };
 

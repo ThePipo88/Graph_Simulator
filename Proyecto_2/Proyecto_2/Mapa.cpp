@@ -4,9 +4,11 @@
 #include "AppContext.h"
 #include "Mapa.h"
 #include "kruskal.h"
+#include "Prim.h"
 
 
-Grafo* g;
+kruskal* g;
+Prim* pr;
 
 
 Mapa::Mapa() {
@@ -40,16 +42,29 @@ void Mapa::bucleJugar(RenderWindow*& ventana) {
 
     sf::Text text2;
     text2.setFont(font);
-    text2.setString("Kruskal");
+    if (AppContext::getInstance().getTipo() == 1) {
+        text2.setString("Kruskal");
+    }
     text2.setFillColor(sf::Color::Red);
     text2.setStyle(sf::Text::Bold);
     text2.setCharacterSize(13);
     text2.setPosition(26, 137);
 
+    sf::Text text3;
+    text3.setFont(font);
+    if (AppContext::getInstance().getTipo() == 1) {
+        text3.setString("Prim");
+    }
+    text3.setFillColor(sf::Color::Red);
+    text3.setStyle(sf::Text::Bold);
+    text3.setCharacterSize(13);
+    text3.setPosition(26, 192);
+
     ventana->clear();
     ventana->draw(sprite);
     ventana->draw(text1);
     ventana->draw(text2);
+    ventana->draw(text3);
 
     if (arista.size() > 0) {
         for (int i = 0; i < arista.size(); i++) {
@@ -58,7 +73,16 @@ void Mapa::bucleJugar(RenderWindow*& ventana) {
             }
             else if (tipo == "kruskal") {
                 for (int j = 0; j < g->getDatos().size(); j++) {
-                    if (arista[i]->getLetra1() == getLetra(g->getDatos()[j].first,"kruskal") && arista[i]->getLetra2() == getLetra(g->getDatos()[j].second, "kruskal")) {
+                    if (arista[i]->getLetra1() == getLetra(g->getDatos()[j].first,"1") && arista[i]->getLetra2() == getLetra(g->getDatos()[j].second, "1") ||
+                        arista[i]->getLetra1() == getLetra(g->getDatos()[j].second, "1") && arista[i]->getLetra2() == getLetra(g->getDatos()[j].first,"1")) {
+                        arista[i]->dibujarLinea(AppContext::getInstance().getWindow());
+                    }
+                }
+            }
+            else if (tipo == "Prim") {
+                for (int j = 0; j < pr->getDatos().size(); j++) {
+                    if (arista[i]->getLetra1() == getLetra(pr->getDatos()[j].first, "1") && arista[i]->getLetra2() == getLetra(pr->getDatos()[j].second, "1") ||
+                        arista[i]->getLetra1() == getLetra(pr->getDatos()[j].second, "1") && arista[i]->getLetra2() == getLetra(pr->getDatos()[j].first, "1")) {
                         arista[i]->dibujarLinea(AppContext::getInstance().getWindow());
                     }
                 }
@@ -73,7 +97,14 @@ void Mapa::bucleJugar(RenderWindow*& ventana) {
             }
             else if (tipo == "kruskal") {
                 for (int j = 0; j < g->getDatos().size(); j++) {
-                    if (vertice[i]->getLetra1() == getLetra(g->getDatos()[j].first, "kruskal") || vertice[i]->getLetra1() == getLetra(g->getDatos()[j].second, "kruskal")) {
+                    if (vertice[i]->getLetra1() == getLetra(g->getDatos()[j].first, "1") || vertice[i]->getLetra1() == getLetra(g->getDatos()[j].second, "1")) {
+                        vertice[i]->dibujarVertice(AppContext::getInstance().getWindow());
+                    }
+                }
+            }
+            else if (tipo == "Prim") {
+                for (int j = 0; j < pr->getDatos().size(); j++) {
+                    if (vertice[i]->getLetra1() == getLetra(pr->getDatos()[j].first, "1") || vertice[i]->getLetra1() == getLetra(pr->getDatos()[j].second, "1")) {
                         vertice[i]->dibujarVertice(AppContext::getInstance().getWindow());
                     }
                 }
@@ -129,22 +160,51 @@ void Mapa::clickPantalla(int x, int y) {
         if (AppContext::getInstance().getTipo() == 1) {
 
             if (tipo == "normal") {
-                g = new Grafo(V, E);
+                g = new kruskal(V, E);
 
                 for (int i = 0; i < datos.size(); i++) {
                     cout << datos[i].n1 << endl;
                     g->agregarArista(datos[i].n1, datos[i].n2, datos[i].p);
                 }
-                int rs = g->kruskal();
+                int rs = g->kruskalAlg();
                 cout << "Kruskal" << endl;
                 for (int i = 0; i < g->getDatos().size(); i++) {
                     int n1 = g->getDatos()[i].first;
                     int n2 = g->getDatos()[i].second;
 
-                    cout << getLetra(n1, "kruskal") + "-" + getLetra(n2, "kruskal") << endl;
+                    cout << getLetra(n1, "1") + "-" + getLetra(n2, "1") << endl;
                 }
                 tipo = "kruskal";
                 cout << "\nWeight of MST is " << rs;
+            }
+            else {
+                tipo = "normal";
+            }
+        }
+        else {
+
+        }
+    }
+    else if (x > 21 && x < 128 && y > 185 && y < 214) {
+
+        if (AppContext::getInstance().getTipo() == 1) {
+
+            if (tipo == "normal") {
+                pr = new Prim(V);
+
+                for (int i = 0; i < datos.size(); i++) {
+                    pr->anadirArista(datos[i].n1, datos[i]
+                        .n2, datos[i].p);
+                }
+                pr->prim();
+                cout << "Prim" << endl;
+                for (int i = 0; i < pr->getDatos().size(); i++) {
+                    int n1 = pr->getDatos()[i].first;
+                    int n2 = pr->getDatos()[i].second;
+
+                    cout << getLetra(n1, "1") + "-" + getLetra(n2, "1") << endl;
+                }
+                tipo = "Prim";
             }
             else {
                 tipo = "normal";
@@ -268,7 +328,7 @@ void Mapa::enter() {
 
 string Mapa::getLetra(int letra, string algoritmo) {
 
-    if (algoritmo == "kruskal") {
+    if (algoritmo == "1") {
         for (int i = 0; i < vertice.size(); i++) {
             if (vertice[i]->getNumero() == letra) {
                 return vertice[i]->getLetra1();

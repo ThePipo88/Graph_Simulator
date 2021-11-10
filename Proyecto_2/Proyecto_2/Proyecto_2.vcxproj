@@ -148,6 +148,7 @@
     <ClCompile Include="Linea.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mapa.cpp" />
+    <ClCompile Include="Prim.cpp" />
     <ClCompile Include="Seleccion.cpp" />
     <ClCompile Include="Ventana.cpp" />
     <ClCompile Include="VerticeGrafico.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="kruskal.h" />
     <ClInclude Include="Linea.h" />
     <ClInclude Include="Mapa.h" />
+    <ClInclude Include="Prim.h" />
     <ClInclude Include="Seleccion.h" />
     <ClInclude Include="Ventana.h" />
     <ClInclude Include="VerticeGrafico.h" />

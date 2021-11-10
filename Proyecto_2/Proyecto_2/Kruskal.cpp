@@ -4,16 +4,16 @@
 
 using namespace std;
 
-Grafo::Grafo(int V, int E) {
+kruskal::kruskal(int V, int E) {
 	this->V = V;
 	this->E = E;
 }
 
-void Grafo::agregarArista(int u, int v, int w) {
+void kruskal::agregarArista(int u, int v, int w) {
 	edges.push_back({ w, {u, v} });
 }
 
-int Grafo::kruskal() {
+int kruskal::kruskalAlg() {
 	int mst_wt = 0; // Initialize result
 
 	// Sort edges in increasing order on basis of cost
@@ -52,7 +52,7 @@ int Grafo::kruskal() {
 	return mst_wt;
 }
 
-vector<iPair> Grafo::getDatos() {
+vector<iPair> kruskal::getDatos() {
 	return datos;
 }
 

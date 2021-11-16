@@ -20,6 +20,8 @@ private:
 	int y1 = 0;
 	int x2 = 0;
 	int y2 = 0;
+	int x3 = 0;
+	int y3 = 0;
 
 public:
 
@@ -29,9 +31,13 @@ public:
 
 	void setX2(int x2);
 
+	void setX3(int x3);
+
 	void setY1(int x1);
 
 	void setY2(int x2);
+
+	void setY3(int y3);
 
 	void setLetra1(string lt1);
 
@@ -43,9 +49,13 @@ public:
 
 	int getX2();
 
+	int getX3();
+
 	int getY1();
 
 	int getY2();
+
+	int getY3();
 
     string getLetra1();
 

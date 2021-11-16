@@ -5,7 +5,7 @@
 #include "Ventana.h"
 #include "AppContext.h"
 #include "Mapa.h"
-#include "Prim.h"
+#include "Dijkstra.h"
 
 
 using namespace std;
@@ -119,26 +119,25 @@ void Ventana::clickPantalla(int x, int y) {
         AppContext::getInstance().setPantalla(2);
     }
     else {
-        // create the graph given in above fugure
-        int V = 9;
-        Prim g(V);
+       
+        
+        Dijkstra j;
 
-        // making above shown graph
-        g.anadirArista(0, 1, 4);
-        g.anadirArista(0, 7, 8);
-        g.anadirArista(1, 2, 8);
-        g.anadirArista(1, 7, 11);
-        g.anadirArista(2, 3, 7);
-        g.anadirArista(2, 8, 2);
-        g.anadirArista(2, 5, 4);
-        g.anadirArista(3, 4, 9);
-        g.anadirArista(3, 5, 14);
-        g.anadirArista(4, 5, 10);
-        g.anadirArista(5, 6, 2);
-        g.anadirArista(6, 7, 1);
-        g.anadirArista(6, 8, 6);
-        g.anadirArista(7, 8, 7);
+        j.insertarNodo('a');
+        j.insertarNodo('b');
+        j.insertarNodo('c');
+        j.insertarNodo('d');
+        j.insertarNodo('e');
 
-        g.prim();
+        j.insertarArista('a', 'b', 1);
+        j.insertarArista('b', 'c', 4);
+        j.insertarArista('a', 'e', 6);
+        j.insertarArista('a', 'd', 3);
+        j.insertarArista('d', 'c', 9);
+        j.insertarArista('b', 'c', 4);
+        j.insertarArista('e', 'c', 7);
+
+        j.dijkstra('a', 'c');
+        
     }
 }

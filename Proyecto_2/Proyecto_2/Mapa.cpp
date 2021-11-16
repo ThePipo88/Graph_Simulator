@@ -5,10 +5,12 @@
 #include "Mapa.h"
 #include "kruskal.h"
 #include "Prim.h"
+#include "Dijkstra.h"
 
 
 kruskal* g;
 Prim* pr;
+Dijkstra* d;
 
 
 Mapa::Mapa() {
@@ -183,6 +185,32 @@ void Mapa::clickPantalla(int x, int y) {
         }
         else {
 
+            if (tipo == "normal") {
+
+                d = new Dijkstra();
+
+                for (int i = 0; i < vertice.size(); i++) {
+                    string letra =  vertice[i]->getLetra1();
+                    char arry[1];
+                    copy(letra.begin(), letra.end(), arry);
+                    d->insertarNodo(arry[0]);
+                }
+
+                for (int i = 0; i < datos.size(); i++) {
+                    string letra1 = getLetra(datos[i].n1,"1");
+                    char arry1[1];
+
+                    string letra2 = getLetra(datos[i].n2, "1");
+                    char arry2[1];
+
+                    copy(letra1.begin(), letra1.end(), arry1);
+                    copy(letra2.begin(), letra2.end(), arry2);
+
+                    d->insertarArista(arry1[0],arry2[0],datos[i].p);
+                }
+
+                d->dijkstra('Z', 'W');
+            }
         }
     }
     else if (x > 21 && x < 128 && y > 185 && y < 214) {
@@ -216,8 +244,6 @@ void Mapa::clickPantalla(int x, int y) {
     }
     else {
 
-        if (AppContext::getInstance().getTipo() == 1) {
-
             tipo = "normal";
 
             if (accion == "Crear vertices") {
@@ -247,6 +273,13 @@ void Mapa::clickPantalla(int x, int y) {
                     if (cant == 0) {
 
                         AristaGrafico* na = new AristaGrafico();
+                        if (AppContext::getInstance().getTipo() == 1) {
+                            na->setDirigido(false);
+                        }
+                        else {
+                            na->setDirigido(true);
+                        }
+                        
                         x1 = Mouse::getPosition(*AppContext::getInstance().getWindow()).x;
                         y1 = Mouse::getPosition(*AppContext::getInstance().getWindow()).y;
                         x2 = Mouse::getPosition(*AppContext::getInstance().getWindow()).x;
@@ -288,6 +321,13 @@ void Mapa::clickPantalla(int x, int y) {
                                 arista[arista.size() - 1]->setLetra2(vertice[i]->getLetra1());
                                 arista[arista.size() - 1]->setX2(x2);
                                 arista[arista.size() - 1]->setY2(y2);
+
+                                
+                                int cx1 = arista[arista.size() - 1]->getX1();
+                                int cx2 = arista[arista.size() - 1]->getX2();
+                                int cy1 = arista[arista.size() - 1]->getY1();
+                                int cy2 = arista[arista.size() - 1]->getY2();
+
                                 cant = 0;
                                 vent = true;
                                 nF = vertice[i]->getNumero();
@@ -298,10 +338,6 @@ void Mapa::clickPantalla(int x, int y) {
                 }
 
             }
-        }
-        else {
-
-        }
     }
 }
 
@@ -311,6 +347,9 @@ void Mapa::moverLinea() {
         y2 = Mouse::getPosition(*AppContext::getInstance().getWindow()).y;
         arista[arista.size() - 1]->setX2(x2);
         arista[arista.size() - 1]->setY2(y2);
+
+        arista[arista.size() - 1]->setX3(x2);
+        arista[arista.size() - 1]->setY3(y2);
     }
 }
 

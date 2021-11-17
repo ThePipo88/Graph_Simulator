@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <vector>
 #include "Ventana.h"
 #include "AppContext.h"
 #include "Mapa.h"
@@ -289,6 +291,19 @@ void Mapa::clickPantalla(int x, int y) {
 
     if (x > 16 && x < 73 && y > 922 && y < 980) {
         cout << "Retroceso" << endl;
+        arista.clear();
+        vertice.clear();
+        V = 0;
+        E = 0;
+        datos.clear();
+        letras.clear();
+        resultado = "";
+        letras = { "Z","Y","X","W","V","U","T","S","R","Q","P","O","Ñ","N","M","L","K","J","I","H","G","F","E","D","C","B","A" };
+        tipo = "normal";
+        selct1 = false;
+        selct2 = false;
+        accion = "Crear vertices";
+        init = false;
         AppContext::getInstance().setPantalla(1);
     }
     else if (x > 21 && x < 128 && y > 75 && y < 103) {
@@ -529,7 +544,167 @@ void Mapa::ingresarPeso(char peso) {
                 iniFin.push_back(peso);
             }
         }
-    }   
+    }  
+
+    if (!selct) {
+        if (peso == 'G' || peso == 'g') {
+            cout << "Guardar" << endl;
+                ofstream fichero("Datos.txt");
+                fichero << "-";
+                for (int i = 0; i < vertice.size(); i++) {
+                    fichero << vertice[i]->getLetra1() << "/" << vertice[i]->getX1() << "/" << vertice[i]->getY1() << "/" << vertice[i]->getNumero() << endl;
+                }
+                fichero << "#" << endl;
+                for (int i = 0; i < arista.size(); i++) {
+                    fichero << arista[i]->getLetra1() << "/" << arista[i]->getLetra2() << "/" << arista[i]->getPeso() << "/" << arista[i]->getX1()<< "/" << arista[i]->getY1() << "/" << arista[i]->getX2() << "/" << arista[i]->getY2() << endl;
+                }
+                fichero << "&" << endl;
+                fichero.close();
+                p = "";
+            
+        }
+        else if (peso == 'C' || peso == 'c') {
+            cout << "Cargar" << endl;
+            arista.clear();
+            vertice.clear();
+            V = 0;
+            E = 0;
+            datos.clear();
+            letras.clear();
+            resultado = "";
+            letras = { "Z","Y","X","W","V","U","T","S","R","Q","P","O","Ñ","N","M","L","K","J","I","H","G","F","E","D","C","B","A" };
+            tipo = "normal";
+            selct1 = false;
+            selct2 = false;
+            accion = "Crear vertices";
+            init = false;
+            string dato = "";
+
+            ifstream f;
+
+            f.open("Datos.txt");
+            if (!f) {
+                cout << "Error abriendo el fichero" << endl;
+            }
+
+            dato = f.get();
+
+            string cadena = "";
+            char caracter;
+            bool term1 = false;
+            bool term2 = false;
+            int cont = 0;
+
+            caracter = f.get();
+
+            while (!f.eof()) {
+
+                while (caracter != '#' && !term1) {
+
+                    while (caracter != '\n') {
+                        cadena += caracter;
+                        caracter = f.get();
+                    }  
+
+                    vector<string> v;
+
+                    tokenize(cadena, '/', v);
+
+                    VerticeGrafico* newVertice = new VerticeGrafico();
+                    newVertice->setX1(stoi(v[1]));
+                    newVertice->setY1(stoi(v[2]));
+                    newVertice->setNumero(stoi(v[3]));
+                    newVertice->setLetra1(v[0]);
+                    letras.pop_back();
+                    vertice.push_back(newVertice);
+                    V++;
+                    v.clear();
+                    cadena = "";
+
+                    caracter = f.get();
+
+                    if (caracter == '#') {
+                        term1 = true;
+                    }
+                }    
+                caracter = f.get();
+                caracter = f.get();
+
+                while (caracter != '&' && !term2) {
+
+                    while (caracter != '\n') {
+                        cadena += caracter;
+                        caracter = f.get();
+                    }
+
+                    vector<string> v;
+                    tokenize(cadena, '/', v);
+
+                    AristaGrafico* na = new AristaGrafico();
+                    na->setLetra1(v[0]);
+                    na->setLetra2(v[1]);
+                    na->setPeso(stoi(v[2]));
+                    na->setX1(stoi(v[3]));
+                    na->setY1(stoi(v[4]));
+                    na->setX2(stoi(v[5]));
+                    na->setY2(stoi(v[6]));
+
+                    if (AppContext::getInstance().getTipo() == 1) {
+                        na->setDirigido(false);
+                    }
+                    else {
+                        na->setDirigido(true);
+                    }
+                    char arry1[1];
+                    copy(v[0].begin(), v[0].end(), arry1);
+
+                    char arry2[1];
+                    copy(v[1].begin(), v[1].end(), arry2);
+
+                    for (int i = 0; i < vertice.size(); i++) {
+                        if (vertice[i]->getLetra1() == v[0]) {
+                            nI = vertice[i]->getNumero();
+                        }
+                    }
+                    
+                    for (int i = 0; i < vertice.size(); i++) {
+                        if (vertice[i]->getLetra1() == v[1]) {
+                            nF = vertice[i]->getNumero();
+                        }
+                    }
+
+                    datos.push_back({ nI, nF,stoi(v[2])});
+
+                    arista.push_back(na);
+
+                    E++;
+                    v.clear();
+                    cadena = "";
+
+                    caracter = f.get();
+
+                    if (caracter == '&') {
+                        term2 = true;
+                    }
+                }
+            }
+            f.close();
+            p = "";
+           
+        }
+    }
+}
+
+void Mapa::tokenize(std::string const& str, const char delim,std::vector<std::string>& out)
+{
+    size_t start;
+    size_t end = 0;
+
+    while ((start = str.find_first_not_of(delim, end)) != std::string::npos)
+    {
+        end = str.find(delim, start);
+        out.push_back(str.substr(start, end - start));
+    }
 }
 
 void Mapa::enter() {
@@ -566,4 +741,16 @@ string Mapa::getLetra(int letra, string algoritmo) {
     }
 
     return "";
+}
+
+int Mapa::getNum(char letra) {
+
+    for (int i = 0; i < letrasResp.size(); i++) {
+        if (letrasResp[i] == letra) {
+            return i;
+        }
+    }
+
+
+    return 0;
 }

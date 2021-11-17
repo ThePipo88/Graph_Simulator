@@ -7,6 +7,7 @@
 # define INF 0x3f3f3f3f
 #include "Prim.h"
 
+//Constructor de la clase
 Prim::Prim(int V) {
 	this->V = V;
 	adj = new list<iPair>[V];
@@ -18,64 +19,62 @@ void Prim::anadirArista(int u, int v, int w) {
 }
 
 void Prim::prim() {
-	// Create a priority queue to store vertices that
-	// are being preinMST. This is weird syntax in C++.
-	// Refer below link for details of this syntax
-	// http://geeksquiz.com/implement-min-heap-using-stl/
+	//	Crear una cola de prioridad para almacenar los vértices que
+	// están siendo evaluados.
 	priority_queue< iPair, vector <iPair>, greater<iPair> > pq;
 
-	int src = 0; // Taking vertex 0 as source
+	int src = 0; // inicia desde el vertice 0
 
-	// Create a vector for keys and initialize all
-	// keys as infinite (INF)
+//	crea un vector de claves, para almacenar los datos datos.
+//	Se inicializan como infinitas INF
 	vector<int> key(V, INF);
 
-	// To store parent array which in turn store MST
+	//	Para almacenar la matriz que a su vez almacena el el arbol de expansión minima
 	vector<int> parent(V, -1);
 
-	// To keep track of vertices included in MST
+	//	Para tener el orden de los vertices incluidos
 	vector<bool> inMST(V, false);
 
-	// Insert source itself in priority queue and initialize
-	// its key as 0.
+	//	Inserta el vertice inicial en la cola de prioridad 
+	//	y la inicializa como 0 
 	pq.push(make_pair(0, src));
 	key[src] = 0;
 
-	/* Looping till priority queue becomes empty */
+	/* Bucle hasta que la cola de prioridad esté vacía */
 	while (!pq.empty())
 	{
-		// The first vertex in pair is the minimum key
-		// vertex, extract it from priority queue.
-		// vertex label is stored in second of pair (it
-		// has to be done this way to keep the vertices
-		// sorted key (key must be first item
-		// in pair)
+		// El primer vértice del par es la clave inical del 
+		// vértice, para extraerlo de la cola de prioridad.
+		// La etiqueta del vértice se almacena en el segundo del par (se
+		// tiene que hacerse así para mantener los vértices
+		// de la clave ordenados (la clave debe ser el primer elemento
+		// en el par)
 		int u = pq.top().second;
 		pq.pop();
 
-		//Different key values for same vertex may exist in the priority queue.
-		//The one with the least key value is always processed first.
-		//Therefore, ignore the rest.
+		//Diferentes valores de clave para un mismo vértice pueden existir en la cola de prioridad.
+		//El que tiene el menor valor de clave siempre se procesa primero.
+		//Por lo tanto, ignora el resto.
 		if (inMST[u] == true) {
 			continue;
 		}
 
-		inMST[u] = true; // Include vertex in MST
+		inMST[u] = true; //incluye el vertice de prioridad en el arbol abarcador minimo
 
-		// 'i' is used to get all adjacent vertices of a vertex
+		// 'i' se utiliza para obtener todos los vértices adyacentes de un vértice
 		list< pair<int, int> >::iterator i;
 		for (i = adj[u].begin(); i != adj[u].end(); ++i)
 		{
-			// Get vertex label and weight of current adjacent
-			// of u.
+			// Obtiene la etiqueta del vértice y el peso del adyacente actual
+			// de u.
 			int v = (*i).first;
 			int weight = (*i).second;
 
-			// If v is not in MST and weight of (u,v) is smaller
-			// than current key of v
+			// Si v no está en el arbol abarcador minimo y el peso de (u,v) es menor
+			// que la clave actual de v
 			if (inMST[v] == false && key[v] > weight)
 			{
-				// Updating key of v
+				//  Actualización de la clave de v
 				key[v] = weight;
 				pq.push(make_pair(key[v], v));
 				parent[v] = u;
@@ -83,7 +82,7 @@ void Prim::prim() {
 		}
 	}
 
-	// Print edges of MST using parent array
+	// Imprime los bordes del arbol abarcador minimo utilizando la matriz de los padres
 	for (int i = 1; i < V; ++i) {
 		printf("%d - %d\n", parent[i], i);
 		datos.push_back({ parent[i], i });

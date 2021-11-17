@@ -54,4 +54,6 @@ public:
 	void enter();
 	string getLetra(int letra, string algoritmo);
 	char getLetraOrigin(string letra);
+	void tokenize(std::string const& str, const char delim, std::vector<std::string>& out);
+	int getNum(char letra);
 };

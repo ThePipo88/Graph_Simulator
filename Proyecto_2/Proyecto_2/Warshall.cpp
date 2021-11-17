@@ -50,6 +50,9 @@ bool Warshall::check_edge_value(int start, int end, int weight) {
 	return true;
 }
 
+
+// Este metodo logra agregar el inicio, fin y el peso del grafo a la matriz dinamica
+// donde se almacenará lo necesario.
 void Warshall::createGraph(int a, int b, int p) {
 	int count = 0;
 	// Primero determine si la información de borde es legal
@@ -63,7 +66,7 @@ void Warshall::createGraph(int a, int b, int p) {
 		arc[b - 1][a - 1] = p;
 	++count;
 }
-
+//Este metodo imprime la matriz de adyacencia, creada según los datos ingresados por el usuario.
 void Warshall::print() {
 	cout << "La matriz de adyacencia del gráfico es:" << endl;
 	int count_row = 0; // Imprime la etiqueta de la línea
@@ -83,6 +86,9 @@ void Warshall::print() {
 	}
 }
 
+
+//Este metodo es capaz de ejecutar el algoritmo de floyd e ir
+//añadiendo los caminos a la matriz de direcciones llamada path.
 void Warshall::Floyd() {
 	int row = 0;
 	int col = 0;
@@ -114,6 +120,9 @@ void Warshall::Floyd() {
 	}
 }
 
+
+//Una vez ejecutado el metodo floyd, la matriz de recorridos estará lista para ser impresa con los
+// valores necesarios. Solamente imprime la ruta de un camino entre un nodo de inicio y otro nodo final.
 void Warshall::print_path(char l1, char l2) {
 	cout << "La ruta más corta de cada par de vértices:" << endl;
 	int row = 0;
@@ -122,6 +131,8 @@ void Warshall::print_path(char l1, char l2) {
 	for (row = 0; row < this->vexnum; row++) {
 		for (col = row + 1; col < this->vexnum; col++) {
 
+
+			//el if, valida que el camino a ingresar en los datos sean los solicitados por el usuario.
 			if (char('A' - 1 + row + 1) == l1 && char('A' - 1 + col + 1) == l2) {
 				string txt1 = "";
 				cout << char('A' - 1 + row + 1) << "---" << char('A' - 1 + col + 1) << " weight: "
@@ -149,6 +160,7 @@ void Warshall::print_path(char l1, char l2) {
 	}
 }
 
+//Devuelve los datos necesarios para realizar las acciones graficas en la vista.
 vector<string> Warshall::getDatos() {
 	return datos;
 }

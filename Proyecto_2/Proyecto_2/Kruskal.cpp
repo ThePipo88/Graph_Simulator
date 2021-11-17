@@ -9,20 +9,20 @@ kruskal::kruskal(int V, int E) {
 	this->E = E;
 }
 
-void kruskal::agregarArista(int u, int v, int w) {
-	edges.push_back({ w, {u, v} });
+void kruskal::agregarArista(int u, int v, int w) { //Se asignan dos ariatas mas el peso
+	edges.push_back({ w, {u, v} }); //Aqui se insertan a las aristas
 }
 
 int kruskal::kruskalAlg() {
-	int mst_wt = 0; // Initialize result
+	int mst_wt = 0; // inicializa el resultado
 
-	// Sort edges in increasing order on basis of cost
+	// Clasifica los bordes en orden creciente según el costo
 	sort(edges.begin(), edges.end());
 
-	// Create disjoint sets
+	// Crear conjuntos disjuntos
 	Conjuntos ds(V);
 
-	// Iterate through all sorted edges
+	// Iterar a través de todos los bordes ordenados
 	vector< pair<int, iPair> >::iterator it;
 	for (it = edges.begin(); it != edges.end(); it++)
 	{
@@ -35,16 +35,16 @@ int kruskal::kruskalAlg() {
 
 		if (set_u != set_v)
 		{
-			// Current edge will be in the MST
-			// so print it
-		    //cout << u << " - " << v << endl;
+			// El borde actual estará en el MST
+			// así que imprímelo
+			// cout << u << "-" << v << endl;
 
-			datos.push_back({u,v});
+			datos.push_back({ u,v });
 
-			// Update MST weight
+			// Actualizar el peso de MST
 			mst_wt += it->first;
 
-			// Merge two sets
+			// Fusionar dos conjuntos
 			ds.unir(set_u, set_v);
 		}
 	}
@@ -58,23 +58,23 @@ vector<iPair> kruskal::getDatos() {
 
 Conjuntos::Conjuntos(int n) {
 
-	// Allocate memory
+	// Asignar memoria
 	this->n = n;
 	parent = new int[n + 1];
 	rnk = new int[n + 1];
 
-	// Initially, all vertices are in
-	// different sets and have rank 0.
+	// Inicialmente, todos los vértices están en
+	// conjuntos diferentes y tienen rango 0.
 	for (int i = 0; i <= n; i++)
 	{
 		rnk[i] = 0;
 
-		//every element is parent of itself
+		// cada elemento es padre de sí mismo
 		parent[i] = i;
 	}
 }
 
-int Conjuntos::encontrar(int u) {
+int Conjuntos::encontrar(int u) { // Aqui se encutra el vertice padre
 
 	if (u != parent[u]) {
 		parent[u] = encontrar(parent[u]);

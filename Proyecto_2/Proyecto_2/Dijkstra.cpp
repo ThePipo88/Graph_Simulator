@@ -21,9 +21,9 @@ void Dijkstra::insertarNodo(char letra) {
 	nuevo->dato = letra;
 	nuevo->siguiente = NULL;
 	nuevo->adyacencia = NULL;
-	nuevo->visitado = nuevo->terminado = 0;
-	nuevo->monto = -1;
-	nuevo->anterior = 0;
+	nuevo->visitado = nuevo->terminado = 0; //Cero en codigo asci es igual a nulo
+	nuevo->monto = -1; //-1 significa que a este nodo no se le asignado ningun valor
+	nuevo->anterior = 0;//Cero en codigo asci es igual a nulo
 	if (inicio == NULL) {
 		inicio = nuevo;
 	}
@@ -197,56 +197,56 @@ void Dijkstra::reiniciar() {
 	}
 }
 //Lorem Ipsum 
-void Dijkstra::dijkstra(char a, char b) {
+void Dijkstra::dijkstra(char a, char b) { //Recibe dos vertices a nodo inicial y b nodo destino
 	Nodo* aux = inicio;
 	fflush(stdin);
 	while (aux != NULL) {
-		if (aux->dato == a) {
-			aux->terminado = 1;
+		if (aux->dato == a) { // auxiliar va a estar apuntando a nodo inicial
+			aux->terminado = 1; // va a ser igual a 1 ya que se va a utilizar como nodo de inicio 
 			aux->monto = 0;
 			break;
 		}
-		aux = aux->siguiente;
+		aux = aux->siguiente; // El while se va a seguir recorriendo 
 	}
-	if (aux == NULL) {
-		printf("Vertice no encontrado\n");
+	if (aux == NULL) { // si auxiliar es igual a nulo lo que quiere decir es que no se encontro el nodo inicial
+		printf("Vertice no encontrado\n"); // Se le envia un mensaje al usuario de que el vertice no se encontro
 		return;
 	}
-	while (aux != NULL) {
-		Arista* a = aux->adyacencia;
-		while (a != NULL) {
-			if (a->vrt->monto == -1 || (aux->monto + a->peso) < a->vrt->monto) {
-				a->vrt->monto = aux->monto + a->peso;
-				a->vrt->anterior = aux->dato;
+	while (aux != NULL) { // mientras sea distinto de null
+		Arista* a = aux->adyacencia; // se declara una arista va a ser igual a auxiliar en su parte de adyacencia, es decir al iniciode la lista de adyacencia de ese nodo
+		while (a != NULL) { //Mientras esta lista de adyacencia sea diferente de nulo
+			if (a->vrt->monto == -1 || (aux->monto + a->peso) < a->vrt->monto) { //si el vertice no se a visitado todavia o cuando se visita un nodo por segunda vez su monto es menos Si es menor cambia si no no
+				a->vrt->monto = aux->monto + a->peso; //sumar cantidad del nodo que viene mas el peso de la arista
+				a->vrt->anterior = aux->dato; // aqui se guarda el dato que venia
 			}
-			a = a->siguiente;
+			a = a->siguiente; // se pasa a la arista siguiente
 		}
-		aux = inicio;
-		Nodo* min = inicio;
+		aux = inicio; // auxiliar va a se igual al inicio
+		Nodo* min = inicio; // nodo min va a ayudar a buscar el nodo que tiene un menor monto
 
-			while (min->anterior == 0 || min->terminado == 1)
-				min = min->siguiente;
-			while (aux != NULL) {
-				if (aux->monto < min->monto && aux->terminado == 0 && aux->anterior != 0)
-					min = aux;
-				aux = aux->siguiente;
-			}
-			aux = min;
-			aux->terminado = 1;
-			if (aux->dato == b)
-				break;
-		
+		while (min->anterior == 0 || min->terminado == 1) // mientras vertice no tenga un nulo en el vertice anterior
+			min = min->siguiente;
+		while (aux != NULL) { //mientras auxiliar sea diferente de nulo 
+			if (aux->monto < min->monto && aux->terminado == 0 && aux->anterior != 0) // se va a indentificar el minimo vertice que tiene el monto mas pequeno && el vertice no tiene que estar terminado && tiene que tener algo en el nodo anterior
+				min = aux; // se recorre la lista de vertices para encontrar el minimo 
+			aux = aux->siguiente; // se sigue recorriendo
+		}
+		aux = min;
+		aux->terminado = 1; // el vertice se marca como terminado, y se van a recorrer de nuevo sus vertices adyacentes
+		if (aux->dato == b) // se encontro el vertice al que se quiere llegar
+			break;
+
 	}
-	while (aux->anterior != 0) {
-		insertarPila(aux);
+	while (aux->anterior != 0) { // se va a imprimir en pantalla para esto se va a utilizar una pila
+		insertarPila(aux); // se inserta el aux en una pila 
 		char temp = aux->anterior;
 		aux = inicio;
-		while (aux->dato != temp) {
-			aux = aux->siguiente;
+		while (aux->dato != temp) { // aqui se va a buscar el nodo que esta anterior a aux en la lista
+			aux = aux->siguiente; // se avanza 
 		}
 	}
 	insertarPila(aux);
-	while (ini != NULL) {
+	while (ini != NULL) { // se va desencolando para imprimir los vertices en orden 
 		string letra = "";
 		letra += desencolar()->dato;
 		cout << letra << " ";
@@ -259,4 +259,3 @@ void Dijkstra::dijkstra(char a, char b) {
 vector<string> Dijkstra::getDatos() {
 	return datos;
 }
-

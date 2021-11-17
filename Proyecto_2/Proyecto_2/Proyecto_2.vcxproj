@@ -153,6 +153,7 @@
     <ClCompile Include="Seleccion.cpp" />
     <ClCompile Include="Ventana.cpp" />
     <ClCompile Include="VerticeGrafico.cpp" />
+    <ClCompile Include="Warshall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppContext.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Seleccion.h" />
     <ClInclude Include="Ventana.h" />
     <ClInclude Include="VerticeGrafico.h" />
+    <ClInclude Include="Warshall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -71,6 +71,8 @@ public:
 
 	void dibujarLinea(RenderWindow* window);
 
+	void dibujarLineaDijkstra(RenderWindow* window);
+
 	int calcularTamanio(int x, int y);
 
 	int calcularFlecha(int x, int y);

@@ -5,7 +5,7 @@
 #include "Ventana.h"
 #include "AppContext.h"
 #include "Mapa.h"
-#include "Dijkstra.h"
+#include "Warshall.h"
 
 
 using namespace std;
@@ -120,24 +120,6 @@ void Ventana::clickPantalla(int x, int y) {
     }
     else {
        
-        
-        Dijkstra j;
-
-        j.insertarNodo('a');
-        j.insertarNodo('b');
-        j.insertarNodo('c');
-        j.insertarNodo('d');
-        j.insertarNodo('e');
-
-        j.insertarArista('a', 'b', 1);
-        j.insertarArista('b', 'c', 4);
-        j.insertarArista('a', 'e', 6);
-        j.insertarArista('a', 'd', 3);
-        j.insertarArista('d', 'c', 9);
-        j.insertarArista('b', 'c', 4);
-        j.insertarArista('e', 'c', 7);
-
-        j.dijkstra('a', 'c');
         
     }
 }

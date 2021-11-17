@@ -137,7 +137,55 @@ void AristaGrafico::dibujarLinea(RenderWindow* window) {
 			cout << "Error al cargar imagen" << endl;
 		}
 		Sprite sprite(texture);
-		sprite.setPosition(calcularFlecha(x1,x3), calcularFlecha(y1, y3));
+		sprite.setPosition(calcularFlecha(x1,x2), calcularFlecha(y1, y2));
+		window->draw(sprite);
+	}
+	window->draw(peso);
+}
+
+void AristaGrafico::dibujarLineaDijkstra(RenderWindow* window) {
+
+	linea[0].position = sf::Vector2f(x1, y1);
+	linea[0].color = sf::Color::Green;
+	linea[1].position = sf::Vector2f(x2, y2);
+	linea[1].color = sf::Color::Green;
+
+	linea->texCoords;
+
+	sf::Text peso;
+	sf::Font font;
+	if (!font.loadFromFile("Resources/arial.ttf"))
+	{
+		// error...
+	}
+
+	// select the font
+	peso.setFont(font);
+
+	// set the string to display
+	peso.setString(to_string(pesoA));
+
+	// set the character size
+	peso.setCharacterSize(24);
+
+	// set the color
+	peso.setFillColor(sf::Color::Green);
+
+	// set the text style
+	peso.setStyle(sf::Text::Bold);
+
+	peso.setPosition(calcularTamanio(x1, x2), calcularTamanio(y1, y2));
+
+	window->draw(linea, 2, sf::Lines);
+	if (dirigido) {
+		Texture texture;
+		//tab = new Tablero();
+		if (!texture.loadFromFile("Resources/estrella.PNG"))
+		{
+			cout << "Error al cargar imagen" << endl;
+		}
+		Sprite sprite(texture);
+		sprite.setPosition(calcularFlecha(x1, x2), calcularFlecha(y1, y2));
 		window->draw(sprite);
 	}
 	window->draw(peso);
@@ -166,12 +214,12 @@ int AristaGrafico::calcularFlecha(int x, int y) {
 	if (x < y) {
 		int datos = (y - x) / 2;
 		int aux = datos;
-		resultado = (x + datos) + (aux-30);
+		resultado = (x + datos) + ((aux)-aux / 2);
 	}
 	else {
 		int datos = (x - y) / 2;
 		int aux = datos;
-		resultado = (y + datos) - (aux+30);
+		resultado = (y + datos) - ((aux)-aux/2);
 	}
 
 	return resultado;

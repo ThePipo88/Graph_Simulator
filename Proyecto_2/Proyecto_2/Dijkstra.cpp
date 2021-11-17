@@ -223,17 +223,19 @@ void Dijkstra::dijkstra(char a, char b) {
 		}
 		aux = inicio;
 		Nodo* min = inicio;
-		while (min->anterior == 0 || min->terminado == 1)
-			min = min->siguiente;
-		while (aux != NULL) {
-			if (aux->monto < min->monto && aux->terminado == 0 && aux->anterior != 0)
-				min = aux;
-			aux = aux->siguiente;
-		}
-		aux = min;
-		aux->terminado = 1;
-		if (aux->dato == b)
-			break;
+
+			while (min->anterior == 0 || min->terminado == 1)
+				min = min->siguiente;
+			while (aux != NULL) {
+				if (aux->monto < min->monto && aux->terminado == 0 && aux->anterior != 0)
+					min = aux;
+				aux = aux->siguiente;
+			}
+			aux = min;
+			aux->terminado = 1;
+			if (aux->dato == b)
+				break;
+		
 	}
 	while (aux->anterior != 0) {
 		insertarPila(aux);
@@ -245,8 +247,16 @@ void Dijkstra::dijkstra(char a, char b) {
 	}
 	insertarPila(aux);
 	while (ini != NULL) {
-		printf("%c ", desencolar()->dato);
+		string letra = "";
+		letra += desencolar()->dato;
+		cout << letra << " ";
+		datos.push_back(letra);
 	}
 	printf("\n");
 	reiniciar();
 }
+
+vector<string> Dijkstra::getDatos() {
+	return datos;
+}
+

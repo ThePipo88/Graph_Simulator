@@ -36,6 +36,7 @@ private:
 	Nodo* inicio = NULL;
 	Lista* ini = NULL;
 	Lista* final = NULL;
+	vector<string> datos;
 
 public:
 	Dijkstra();
@@ -50,4 +51,5 @@ public:
 	Nodo* desencolar();
 	void reiniciar();
 	void dijkstra(char a, char b);
+	vector<string> getDatos();
 };

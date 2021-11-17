@@ -1,14 +1,20 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <string>
 #include "Ventana.h"
 #include "AppContext.h"
 #include "Mapa.h"
 #include "kruskal.h"
 #include "Prim.h"
+#include "Dijkstra.h"
+#include "Warshall.h"
 
+using namespace std;
 
-kruskal* g;
-Prim* pr;
+kruskal *g;
+Prim *pr;
+Dijkstra *d;
+Warshall *w;
 
 
 Mapa::Mapa() {
@@ -45,6 +51,9 @@ void Mapa::bucleJugar(RenderWindow*& ventana) {
     if (AppContext::getInstance().getTipo() == 1) {
         text2.setString("Kruskal");
     }
+    else {
+        text2.setString("Dijkstra");
+    }
     text2.setFillColor(sf::Color::Red);
     text2.setStyle(sf::Text::Bold);
     text2.setCharacterSize(13);
@@ -55,16 +64,29 @@ void Mapa::bucleJugar(RenderWindow*& ventana) {
     if (AppContext::getInstance().getTipo() == 1) {
         text3.setString("Prim");
     }
+    else {
+        text3.setString("Warshall");
+    }
     text3.setFillColor(sf::Color::Red);
     text3.setStyle(sf::Text::Bold);
     text3.setCharacterSize(13);
     text3.setPosition(26, 192);
+
+    sf::Text result;
+    result.setFont(font);
+    result.setString(resultado);
+    result.setFillColor(sf::Color::White);
+    result.setStyle(sf::Text::Bold);
+    result.setCharacterSize(13);
+    result.setPosition(26, 250);
+
 
     ventana->clear();
     ventana->draw(sprite);
     ventana->draw(text1);
     ventana->draw(text2);
     ventana->draw(text3);
+    ventana->draw(result);
 
     if (arista.size() > 0) {
         for (int i = 0; i < arista.size(); i++) {
@@ -87,12 +109,38 @@ void Mapa::bucleJugar(RenderWindow*& ventana) {
                     }
                 }
             }
+            else if (tipo == "Dijkstra") {
+
+                arista[i]->dibujarLinea(AppContext::getInstance().getWindow());
+
+                for (int j = 0; j < d->getDatos().size(); j++) {
+                    if (j+1 < d->getDatos().size()) {
+                        if (arista[i]->getLetra1() == d->getDatos()[j] && arista[i]->getLetra2() == d->getDatos()[j+1] ||
+                            arista[i]->getLetra1() == d->getDatos()[j + 1] && arista[i]->getLetra2() == d->getDatos()[j]) {
+                            arista[i]->dibujarLineaDijkstra(AppContext::getInstance().getWindow());
+                        }
+                    }
+                }
+            }
+            else if (tipo == "Warshall") {
+
+                arista[i]->dibujarLinea(AppContext::getInstance().getWindow());
+
+                for (int j = 0; j < w->getDatos().size(); j++) {
+                    if (j + 1 < w->getDatos().size()) {
+                        if (arista[i]->getLetra1() == w->getDatos()[j] && arista[i]->getLetra2() == w->getDatos()[j + 1] ||
+                            arista[i]->getLetra1() == w->getDatos()[j + 1] && arista[i]->getLetra2() == w->getDatos()[j]) {
+                            arista[i]->dibujarLineaDijkstra(AppContext::getInstance().getWindow());
+                        }
+                    }
+                }
+            }
         }
     }
 
     if (vertice.size() > 0) {
         for (int i = 0; i < vertice.size(); i++) {
-            if (tipo == "normal") {
+            if (tipo == "normal" || tipo == "Dijkstra" || tipo == "Warshall") {
                 vertice[i]->dibujarVertice(AppContext::getInstance().getWindow());
             }
             else if (tipo == "kruskal") {
@@ -108,6 +156,105 @@ void Mapa::bucleJugar(RenderWindow*& ventana) {
                         vertice[i]->dibujarVertice(AppContext::getInstance().getWindow());
                     }
                 }
+            }
+        }
+    }
+
+    if (selct) {
+
+        sf::Text text3;
+        sf::Font font;
+        if (!font.loadFromFile("Resources/arial.ttf"))
+        {
+            // error...
+        }
+
+        text3.setFont(font);
+        text3.setCharacterSize(24);
+        text3.setFillColor(sf::Color::White);
+        text3.setStyle(sf::Text::Bold);
+        text3.setPosition(800, 2);
+
+        sf::Text let;
+        if (!font.loadFromFile("Resources/arial.ttf"))
+        {
+            // error...
+        }
+
+        let.setFont(font);
+        let.setCharacterSize(24);
+        let.setFillColor(sf::Color::Red);
+        let.setStyle(sf::Text::Bold);
+        let.setPosition(1130, 2);
+        let.setString(p);
+
+        if (!selct1) {
+            text3.setString("Seleccione el nodo inicial");
+            ventana->draw(text3);
+            ventana->draw(let);
+        }
+        else if (!selct2) {
+            text3.setString("Seleccione el nodo final");
+            ventana->draw(text3);
+            ventana->draw(let);
+        }
+        else {
+
+            if(Gd == 1){
+
+                d = new Dijkstra();
+
+                for (int i = 0; i < vertice.size(); i++) {
+                    string letra = vertice[i]->getLetra1();
+                    char arry[1];
+                    copy(letra.begin(), letra.end(), arry);
+                    d->insertarNodo(arry[0]);
+                }
+
+                resultado = "Dijkstra \n";
+                for (int i = 0; i < datos.size(); i++) {
+                    string letra1 = getLetra(datos[i].n1, "1");
+                    char arry1[1];
+
+                    string letra2 = getLetra(datos[i].n2, "1");
+                    char arry2[1];
+
+                    copy(letra1.begin(), letra1.end(), arry1);
+                    copy(letra2.begin(), letra2.end(), arry2);
+
+                    d->insertarArista(arry1[0], arry2[0], datos[i].p);
+                }
+
+                cout << iniFin.size();
+
+                d->dijkstra(iniFin[0], iniFin[1]);
+
+                for (int i = 0; i < d->getDatos().size(); i++) {
+                    resultado += d->getDatos()[i] + "\n";
+                }
+
+                tipo = "Dijkstra";
+                selct = false;
+
+            }
+            else {
+
+                resultado = "Warshall \n";
+
+                w = new Warshall(V+1, E);
+
+                for (int i = 0; i < datos.size(); i++) {
+                    w->createGraph(datos[i].n1+1,datos[i].n2+1,datos[i].p);
+                }
+
+                w->Floyd();
+                w->print_path(iniFin[0], iniFin[1]);
+
+                for (int i = 0; i < w->getDatos().size(); i++) {
+                    resultado += w->getDatos()[i] + "\n";
+                }
+                tipo = "Warshall";
+                selct = false;
             }
         }
     }
@@ -154,6 +301,21 @@ void Mapa::clickPantalla(int x, int y) {
         }
         
     }
+    else if (x > 1833 && x < 1879 && y > 36 && y < 96) {
+        cout << "Eliminar" << endl;
+        arista.clear();
+        vertice.clear();
+        V = 0; 
+        E = 0;
+        datos.clear();
+        letras.clear();
+        resultado = "";
+        letras = { "Z","Y","X","W","V","U","T","S","R","Q","P","O","Ñ","N","M","L","K","J","I","H","G","F","E","D","C","B","A" };
+        tipo = "normal";
+        selct1 = false;
+        selct2 = false;
+        accion = "Crear vertices";
+    }
     else if (x > 21 && x < 128 && y > 130 && y < 159) {
 
         cout << "Kruskal" << endl;
@@ -168,21 +330,38 @@ void Mapa::clickPantalla(int x, int y) {
                 }
                 int rs = g->kruskalAlg();
                 cout << "Kruskal" << endl;
+                resultado += "Kruskal \n";
+
                 for (int i = 0; i < g->getDatos().size(); i++) {
                     int n1 = g->getDatos()[i].first;
                     int n2 = g->getDatos()[i].second;
 
                     cout << getLetra(n1, "1") + "-" + getLetra(n2, "1") << endl;
+                    resultado += getLetra(n1, "1") + "-" + getLetra(n2, "1") +"\n";
                 }
                 tipo = "kruskal";
                 cout << "\nWeight of MST is " << rs;
             }
             else {
                 tipo = "normal";
+                resultado = "";
             }
         }
         else {
 
+            if (tipo == "normal") {
+                iniFin.clear();
+                Gd = 1;
+                selct = true;    
+               
+            }
+            else {
+                tipo = "normal";
+                resultado = "";
+                selct = false;
+                selct1 = false;
+                selct2 = false;
+            }
         }
     }
     else if (x > 21 && x < 128 && y > 185 && y < 214) {
@@ -198,25 +377,39 @@ void Mapa::clickPantalla(int x, int y) {
                 }
                 pr->prim();
                 cout << "Prim" << endl;
+                resultado += "Prim \n";
                 for (int i = 0; i < pr->getDatos().size(); i++) {
                     int n1 = pr->getDatos()[i].first;
                     int n2 = pr->getDatos()[i].second;
 
                     cout << getLetra(n1, "1") + "-" + getLetra(n2, "1") << endl;
+                    resultado += getLetra(n1, "1") + "-" + getLetra(n2, "1") + "\n";
                 }
                 tipo = "Prim";
             }
             else {
                 tipo = "normal";
+                resultado = "";
             }
         }
         else {
 
+            if (tipo == "normal") {
+                iniFin.clear();
+                Gd = 2;
+                selct = true;
+            }
+            else {
+                tipo = "normal";
+                resultado = "";
+                selct = false;
+                selct1 = false;
+                selct2 = false;
+            }
+
         }
     }
     else {
-
-        if (AppContext::getInstance().getTipo() == 1) {
 
             tipo = "normal";
 
@@ -224,7 +417,6 @@ void Mapa::clickPantalla(int x, int y) {
                 if (init) {
                     x1 = x;
                     y1 = y;
-                    cout <<V<< endl;
                     VerticeGrafico* newVertice = new VerticeGrafico();
                     newVertice->setX1(x);
                     newVertice->setY1(y);
@@ -233,6 +425,7 @@ void Mapa::clickPantalla(int x, int y) {
                     letras.pop_back();
                     vertice.push_back(newVertice);
                     V++;
+                    cout << V << endl;
                 }
                 else {
                     init = true;
@@ -247,18 +440,24 @@ void Mapa::clickPantalla(int x, int y) {
                     if (cant == 0) {
 
                         AristaGrafico* na = new AristaGrafico();
+                        if (AppContext::getInstance().getTipo() == 1) {
+                            na->setDirigido(false);
+                        }
+                        else {
+                            na->setDirigido(true);
+                        }
+                        
                         x1 = Mouse::getPosition(*AppContext::getInstance().getWindow()).x;
                         y1 = Mouse::getPosition(*AppContext::getInstance().getWindow()).y;
                         x2 = Mouse::getPosition(*AppContext::getInstance().getWindow()).x;
                         y2 = Mouse::getPosition(*AppContext::getInstance().getWindow()).y;
 
-                        cout << arista.size() << endl;
+                        
 
                         for (int i = 0; i < vertice.size(); i++) {
                             if (vertice[i]->getX1() + 10 >= x1 && vertice[i]->getX1() - 10 <= x1 && vertice[i]->getY1() + 10 >= y1 && vertice[i]->getY1() - 10 <= y1) {
                                 na->setLetra1(vertice[i]->getLetra1());
                                 arista.push_back(na);
-                                cout << "Entroo" << endl;
                                 x1 = vertice[i]->getX1();
                                 y1 = vertice[i]->getY1();
                                 x2 = vertice[i]->getX1();
@@ -288,6 +487,13 @@ void Mapa::clickPantalla(int x, int y) {
                                 arista[arista.size() - 1]->setLetra2(vertice[i]->getLetra1());
                                 arista[arista.size() - 1]->setX2(x2);
                                 arista[arista.size() - 1]->setY2(y2);
+
+                                
+                                int cx1 = arista[arista.size() - 1]->getX1();
+                                int cx2 = arista[arista.size() - 1]->getX2();
+                                int cy1 = arista[arista.size() - 1]->getY1();
+                                int cy2 = arista[arista.size() - 1]->getY2();
+
                                 cant = 0;
                                 vent = true;
                                 nF = vertice[i]->getNumero();
@@ -298,10 +504,6 @@ void Mapa::clickPantalla(int x, int y) {
                 }
 
             }
-        }
-        else {
-
-        }
     }
 }
 
@@ -311,19 +513,46 @@ void Mapa::moverLinea() {
         y2 = Mouse::getPosition(*AppContext::getInstance().getWindow()).y;
         arista[arista.size() - 1]->setX2(x2);
         arista[arista.size() - 1]->setY2(y2);
+
+        arista[arista.size() - 1]->setX3(x2);
+        arista[arista.size() - 1]->setY3(y2);
     }
 }
 
 void Mapa::ingresarPeso(char peso) {
     p += peso;
+
+    if (selct) {
+        for (int i = 0; i < letrasResp.size(); i++) {
+            if (peso == letrasResp[i]) {
+                cout << "Letra encontrada" << endl;
+                iniFin.push_back(peso);
+            }
+        }
+    }   
 }
 
 void Mapa::enter() {
-    arista[arista.size() - 1]->setPeso(stoi(p));
-    pS = stoi(p);
-    vent = false;
-    datos.push_back({ nI, nF,pS});
-    p = "";
+
+    if (!selct1 && selct) {   
+        if (iniFin.size() >= 1) {
+            selct1 = true;
+        }
+        p = "";
+    }
+    else if (!selct2 && selct) {
+        if (iniFin.size() >= 2) {
+            selct2 = true;
+        }
+        p = "";
+    }
+    else {
+        arista[arista.size() - 1]->setPeso(stoi(p));
+        pS = stoi(p);
+        vent = false;
+        datos.push_back({ nI, nF,pS });
+        p = "";
+    }  
 }
 
 string Mapa::getLetra(int letra, string algoritmo) {

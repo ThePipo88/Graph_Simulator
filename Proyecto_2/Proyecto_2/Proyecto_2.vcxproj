@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="AppContext.cpp" />
     <ClCompile Include="AristaGrafico.cpp" />
+    <ClCompile Include="Dijkstra.cpp" />
     <ClCompile Include="Kruskal.cpp" />
     <ClCompile Include="Linea.cpp" />
     <ClCompile Include="main.cpp" />
@@ -152,10 +153,12 @@
     <ClCompile Include="Seleccion.cpp" />
     <ClCompile Include="Ventana.cpp" />
     <ClCompile Include="VerticeGrafico.cpp" />
+    <ClCompile Include="Warshall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppContext.h" />
     <ClInclude Include="AristaGrafico.h" />
+    <ClInclude Include="Dijkstra.h" />
     <ClInclude Include="kruskal.h" />
     <ClInclude Include="Linea.h" />
     <ClInclude Include="Mapa.h" />
@@ -163,6 +166,7 @@
     <ClInclude Include="Seleccion.h" />
     <ClInclude Include="Ventana.h" />
     <ClInclude Include="VerticeGrafico.h" />
+    <ClInclude Include="Warshall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

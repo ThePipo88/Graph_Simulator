@@ -1,58 +1,60 @@
 ﻿  Mapa.cpp
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(225,26): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(226,26): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(250,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(418,26): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(419,26): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(450,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=int
           ]
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(251,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(451,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=int
           ]
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(252,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(452,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=int
           ]
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(253,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(453,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=int
           ]
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(262,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(263,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(264,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(265,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(266,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(267,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(268,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(269,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(280,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(461,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(462,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(463,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(464,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(465,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(466,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(467,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(468,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(479,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=int
           ]
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(281,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(480,88): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=int
           ]
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(286,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(287,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(289,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(290,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(310,72): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(485,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(486,55): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(488,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(489,66): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(512,72): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=int
           ]
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(311,72): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(513,72): warning C4244: '=': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=int
           ]
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(312,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(313,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(514,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(515,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(517,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\Proyecto_2\Mapa.cpp(518,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
   Proyecto_2.vcxproj -> C:\Users\Pipo\Documents\GitHub\Proyecto_2\Proyecto_2\x64\Debug\Proyecto_2.exe

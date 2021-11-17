@@ -28,6 +28,7 @@ private:
 	bool selct = false;
 	bool selct1 = false;
 	bool selct2 = false;
+	bool guardado = false;
 	int cant = 0;
 	int V = 0;
 	int E = 0;

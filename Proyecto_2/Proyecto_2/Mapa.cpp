@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <windows.h>
 #include "Ventana.h"
 #include "AppContext.h"
 #include "Mapa.h"
@@ -261,6 +262,25 @@ void Mapa::bucleJugar(RenderWindow*& ventana) {
         }
     }
 
+    if (guardado) {
+        sf::Text let;
+        if (!font.loadFromFile("Resources/arial.ttf"))
+        {
+            // error...
+        }
+
+        let.setFont(font);
+        let.setCharacterSize(24);
+        let.setFillColor(sf::Color::Red);
+        let.setStyle(sf::Text::Bold);
+        let.setPosition(800, 2);
+        let.setString("Algoritmo guardado con exito");
+        ventana->draw(let);
+        ventana->display();
+        Sleep(2000);
+        guardado = false;
+
+    }
     if (vent) {
         Texture peso;
         peso.loadFromFile("Resources/pesos.PNG");
@@ -561,7 +581,7 @@ void Mapa::ingresarPeso(char peso) {
                 fichero << "&" << endl;
                 fichero.close();
                 p = "";
-            
+                guardado = true;
         }
         else if (peso == 'C' || peso == 'c') {
             cout << "Cargar" << endl;
@@ -690,7 +710,6 @@ void Mapa::ingresarPeso(char peso) {
             }
             f.close();
             p = "";
-           
         }
     }
 }

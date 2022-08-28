@@ -3,73 +3,86 @@
 
 using namespace std;
 
-
-//Esta clase es de tipo Singlenton, y se encarga de guardar datos importantes del juego
-AppContext::AppContext() {
+// This class is of type Singlenton, and is responsible for saving important game data
+AppContext::AppContext()
+{
 
 	pantalla = 1;
 	ventana = nullptr;
-
 }
 
-AppContext& AppContext::getInstance() {
+AppContext &AppContext::getInstance()
+{
 	static AppContext INSTANCE;
 	return INSTANCE;
 }
 
-int AppContext::getPantalla() {
+int AppContext::getPantalla()
+{
 	return this->pantalla;
 }
 
-int AppContext::getTipo() {
+int AppContext::getTipo()
+{
 	return this->tipo;
 }
 
-void AppContext::setPantalla(int p) {
+void AppContext::setPantalla(int p)
+{
 	this->pantalla = p;
 }
 
-void AppContext::setTipo(int t) {
+void AppContext::setTipo(int t)
+{
 	this->tipo = t;
 }
 
-RenderWindow* AppContext::getWindow() {
+RenderWindow *AppContext::getWindow()
+{
 	return ventana;
 }
 
-void AppContext::setWindow(RenderWindow* v) {
+void AppContext::setWindow(RenderWindow *v)
+{
 	this->ventana = v;
 }
 
-Event* AppContext::getEvent() {
+Event *AppContext::getEvent()
+{
 	return ev;
 }
 
-void AppContext::setEvent(Event* e) {
+void AppContext::setEvent(Event *e)
+{
 	ev = e;
 }
 
-void AppContext::setPartidaCargada(bool partida) {
+void AppContext::setPartidaCargada(bool partida)
+{
 	this->partidaCargada = partida;
 }
 
-bool AppContext::getPartidaCargada() {
+bool AppContext::getPartidaCargada()
+{
 	return this->partidaCargada;
 }
 
-void AppContext::setDatosPartida(string datos) {
+void AppContext::setDatosPartida(string datos)
+{
 	this->datosPartida = datos;
 }
 
-string AppContext::getDatosPartida() {
+string AppContext::getDatosPartida()
+{
 	return this->datosPartida;
 }
 
-vector<par> AppContext::getResultadoKruskal() {
+vector<par> AppContext::getResultadoKruskal()
+{
 	return datosKrukal;
 }
 
-
-void AppContext::setDatosKruskal(int u, int v) {
-	datosKrukal.push_back({u,v});
+void AppContext::setDatosKruskal(int u, int v)
+{
+	datosKrukal.push_back({u, v});
 }

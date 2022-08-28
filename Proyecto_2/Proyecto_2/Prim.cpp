@@ -1,80 +1,82 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <functional>  
-#include <algorithm>  
+#include <functional>
+#include <algorithm>
 #include <queue>
 #include <list>
-# define INF 0x3f3f3f3f
+#define INF 0x3f3f3f3f
 #include "Prim.h"
 
-//Constructor de la clase
-Prim::Prim(int V) {
+// class constructor
+Prim::Prim(int V)
+{
 	this->V = V;
 	adj = new list<iPair>[V];
 }
 
-void Prim::anadirArista(int u, int v, int w) {
+void Prim::anadirArista(int u, int v, int w)
+{
 	adj[u].push_back(make_pair(v, w));
 	adj[v].push_back(make_pair(u, w));
 }
 
-void Prim::prim() {
-	//	Crear una cola de prioridad para almacenar los vértices que
-	// están siendo evaluados.
-	priority_queue< iPair, vector <iPair>, greater<iPair> > pq;
+void Prim::prim()
+{
+	// Create a priority queue to store the vertices that
+	// are being evaluated.//
+	priority_queue<iPair, vector<iPair>, greater<iPair>> pq;
 
-	int src = 0; // inicia desde el vertice 0
+	int src = 0; // start from vertex 0
 
-//	crea un vector de claves, para almacenar los datos datos.
-//	Se inicializan como infinitas INF
+	// create a vector of keys, to store the data data.
+	// Initialize as infinite INF
 	vector<int> key(V, INF);
 
-	//	Para almacenar la matriz que a su vez almacena el el arbol de expansión minima
+	// To store the array which in turn stores the minimum spanning tree
 	vector<int> parent(V, -1);
 
-	//	Para tener el orden de los vertices incluidos
+	// To have the order of the vertices included
 	vector<bool> inMST(V, false);
 
-	//	Inserta el vertice inicial en la cola de prioridad 
-	//	y la inicializa como 0 
+	// Insert the initial vertex into the priority queue
+	// and initialize it to 0
 	pq.push(make_pair(0, src));
 	key[src] = 0;
 
-	/* Bucle hasta que la cola de prioridad esté vacía */
+	/* Loop until priority queue is empty */
 	while (!pq.empty())
 	{
-		// El primer vértice del par es la clave inical del 
-		// vértice, para extraerlo de la cola de prioridad.
-		// La etiqueta del vértice se almacena en el segundo del par (se
-		// tiene que hacerse así para mantener los vértices
-		// de la clave ordenados (la clave debe ser el primer elemento
-		// en el par)
+		// The first vertex of the pair is the initial key of the
+		// vertex, to extract it from the priority queue.
+		// The vertex label is stored in the second of the pair (it is
+		// it has to be done like this to keep the vertices
+		// of the sorted key (the key must be the first element in par)
 		int u = pq.top().second;
 		pq.pop();
 
-		//Diferentes valores de clave para un mismo vértice pueden existir en la cola de prioridad.
-		//El que tiene el menor valor de clave siempre se procesa primero.
-		//Por lo tanto, ignora el resto.
-		if (inMST[u] == true) {
+		// Different key values â€‹â€‹for the same vertex can exist in the priority queue.
+		// The one with the lowest key value is always processed first.
+		// So ignore the rest.
+		if (inMST[u] == true)
+		{
 			continue;
 		}
 
-		inMST[u] = true; //incluye el vertice de prioridad en el arbol abarcador minimo
+		inMST[u] = true; // include the priority vertex in the minimum spanning tree
 
-		// 'i' se utiliza para obtener todos los vértices adyacentes de un vértice
-		list< pair<int, int> >::iterator i;
+		// 'i' is used to get all adjacent vertices of a vertex
+		list<pair<int, int>>::iterator i;
 		for (i = adj[u].begin(); i != adj[u].end(); ++i)
 		{
-			// Obtiene la etiqueta del vértice y el peso del adyacente actual
-			// de u.
+			// Get the vertex label and the weight of the current neighbor from u.
 			int v = (*i).first;
 			int weight = (*i).second;
 
-			// Si v no está en el arbol abarcador minimo y el peso de (u,v) es menor
-			// que la clave actual de v
+			// If v is not in the minimum spanning tree and the weight of (u,v) is less
+			// than the current key of v
 			if (inMST[v] == false && key[v] > weight)
 			{
-				//  Actualización de la clave de v
+				// v key update
 				key[v] = weight;
 				pq.push(make_pair(key[v], v));
 				parent[v] = u;
@@ -82,13 +84,15 @@ void Prim::prim() {
 		}
 	}
 
-	// Imprime los bordes del arbol abarcador minimo utilizando la matriz de los padres
-	for (int i = 1; i < V; ++i) {
+	// Print the borders of the minimum spanning tree using the parent array
+	for (int i = 1; i < V; ++i)
+	{
 		printf("%d - %d\n", parent[i], i);
-		datos.push_back({ parent[i], i });
+		datos.push_back({parent[i], i});
 	}
 }
 
-vector<iPair> Prim::getDatos() {
+vector<iPair> Prim::getDatos()
+{
 	return datos;
 }

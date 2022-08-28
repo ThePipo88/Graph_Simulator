@@ -1,22 +1,24 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <functional>  
-#include <algorithm>  
+#include <functional>
+#include <algorithm>
 #include <queue>
 #include <list>
 
 using namespace std;
 
-class Warshall{
+class Warshall
+{
 
 private:
-	int vexnum;   // Número de vértices del gráfico.
-	int edge;     // Número de aristas del gráfico
-	int** arc;   // matriz de adyacencia
-	int** dis;   // Registre la información de la ruta más corta de cada vértice
-	int** path;  // Registra la información de cada ruta más corta
+	int vexnum; // Number of vertices of the graph.
+	int edge;	// Number of edges of the graph
+	int **arc;	// adjacency matrix
+	int **dis;	// Record the shortest path information for each vertex
+	int **path; // Record the information of each shortest path
 	int kind = 1;
 	vector<string> datos;
+
 public:
 	Warshall(int vexnum, int edge);
 	~Warshall();
